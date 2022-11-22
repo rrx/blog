@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Engineering Blog</title>
+    <link>https://rrx.github.io/blog/post/</link>
+    <description>Recent content in Posts on Engineering Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 21 Nov 2022 19:33:40 -0800</lastBuildDate><atom:link href="https://rrx.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post</title>
+      <link>https://rrx.github.io/blog/post/my-first-post/</link>
+      <pubDate>Mon, 21 Nov 2022 19:33:40 -0800</pubDate>
+      
+      <guid>https://rrx.github.io/blog/post/my-first-post/</guid>
+      <description>&lt;p&gt;This is a summary&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
