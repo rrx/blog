@@ -1,4 +1,4 @@
-baseURL = "https://rrx.github.io/blog"
+baseURL = "https://rrx.github.io"
 title = "Engineering Blog"
 
 theme = "fuji"
