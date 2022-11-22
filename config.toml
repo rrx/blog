@@ -71,12 +71,11 @@ og = "/img/og.png"                                          # This will use the 
 # Posts shown in homepage
 mainSections = ["post"]
 
-# Bangumi image chart id
-# bgmImageChart = "000000"
+math = true
 
 # License
-license = "CC BY-NC-SA 4.0"
-licenseLink = "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+#license = "CC BY-NC-SA 4.0"
+#licenseLink = "http://creativecommons.org/licenses/by-nc-sa/4.0/"
 
 # Comments
 # utterances, see: https://utteranc.es/
@@ -102,6 +101,7 @@ lazyPlaceholderCol = "/assets/lazyload/dsrca_loading_480x540.svg"
 # disableDarkImage = true
 
 [markup]
+math = true
 [markup.goldmark]
 [markup.goldmark.renderer]
 unsafe = true # Enable user to embed HTML snippets in Markdown content
@@ -139,16 +139,8 @@ weight = 5
 
 [[menu.link]]
 name = "GitHub"
-url = "https://github.com/dsrkafuu"
+url = "https://github.com/rrx"
 weight = 1
-[[menu.link]]
-name = "Twitter"
-url = "https://twitter.com/dsrkafuu"
-weight = 2
-[[menu.link]]
-name = "bilibili"
-url = "https://space.bilibili.com/19767474"
-weight = 3
 
 [build]
 noJSConfigInAssets = true

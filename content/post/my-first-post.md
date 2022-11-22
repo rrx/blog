@@ -2,7 +2,6 @@
 title: "My First Post"
 date: 2022-11-21T19:33:40-08:00
 draft: false
-math: true
 ---
 
 This is a summary
