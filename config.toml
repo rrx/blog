@@ -54,10 +54,10 @@ showWordCounter = true
 showReadTime = false
 
 # License in the footer
-showLicenseInFooter = false
+showLicenseInFooter = true
 
 # License at the end of each post
-showLicense = true
+showLicense = false
 showToc = true
 
 # Copyright
@@ -65,11 +65,11 @@ copyrightStartYear = "2022"
 
 # Open Graph & Twitter Card variables
 # You can also set description and images in post front matter individually
-description = "A minimal Hugo theme with nice theme color."
+description = "An engineering blog."
 og = "/img/og.png"                                          # This will use the image called og.png in static/img folder
 
 # Posts shown in homepage
-mainSections = ["post"]
+mainSections = ["posts"]
 
 math = true
 
@@ -142,6 +142,11 @@ weight = 5
 [[menu.link]]
 name = "GitHub"
 url = "https://github.com/rrx"
+weight = 1
+
+[[menu.link]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/ryansadler/"
 weight = 1
 
 [build]
