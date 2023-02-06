@@ -1,5 +1,5 @@
-baseURL = "https://rrx.github.io"
-title = "Engineering Blog"
+baseURL = "https://github.dsrkafuu.net/hugo-theme-fuji/"
+title = "Hugo Theme Fuji"
 
 theme = "fuji"
 hasCJKLanguage = true
@@ -14,7 +14,6 @@ defaultContentLanguage = "en" # For HTML page, now support: en, zh-hans, zh-hant
 
 summaryLength = 100 # Custom summary length, add <!--more--> in post file to custom split point
 paginate = 10
-math = true
 
 # googleAnalytics = "UA-000000000-0" # Set your Google Analytics UA here
 
@@ -32,12 +31,12 @@ home = ["HTML", "RSS", "SearchIndex"]
 post = "/:section/:filename/" # Custom post links, e.g. "/:year/:month/:title/"
 
 [params]
-author = "rrx"                # You can also set author in post front matter individually
-subTitle = "A software engineering blog"
-defaultTheme = "dark"              # default theme when first visit (auto|dark|light)
+author = "DSRKafuU"                # You can also set author in post front matter individually
+subTitle = "A minimal Hugo theme."
+defaultTheme = "auto"              # default theme when first visit (auto|dark|light)
 
 # Source URL of the website, will appear in the footer
-sourceURL = "https://github.com/rrx/blog"
+sourceURL = "https://github.com/dsrkafuu/hugo-theme-fuji"
 
 # Use CloudFlare Workers to accelerate the Google Analytics
 # If you are using this please comment the googleAnalytics above
@@ -54,28 +53,29 @@ showWordCounter = true
 showReadTime = false
 
 # License in the footer
-showLicenseInFooter = true
+showLicenseInFooter = false
 
 # License at the end of each post
-showLicense = false
+showLicense = true
 showToc = true
 
 # Copyright
-copyrightStartYear = "2022"
+copyrightStartYear = "2020"
 
 # Open Graph & Twitter Card variables
 # You can also set description and images in post front matter individually
-description = "An engineering blog."
+description = "A minimal Hugo theme with nice theme color."
 og = "/img/og.png"                                          # This will use the image called og.png in static/img folder
 
 # Posts shown in homepage
-mainSections = ["posts"]
+mainSections = ["post"]
 
-math = true
+# Bangumi image chart id
+# bgmImageChart = "000000"
 
 # License
-#license = "CC BY-NC-SA 4.0"
-#licenseLink = "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+license = "CC BY-NC-SA 4.0"
+licenseLink = "http://creativecommons.org/licenses/by-nc-sa/4.0/"
 
 # Comments
 # utterances, see: https://utteranc.es/
@@ -101,14 +101,11 @@ lazyPlaceholderCol = "/assets/lazyload/dsrca_loading_480x540.svg"
 # disableDarkImage = true
 
 [markup]
-math = true
 [markup.goldmark]
 [markup.goldmark.renderer]
 unsafe = true # Enable user to embed HTML snippets in Markdown content
 [markup.highlight]
-codeFences = true # Disable Hugo's code highlighter
-anchorLineNos = true
-style = "darcula"
+codeFences = false # Disable Hugo's code highlighter
 
 [markup.tableOfContents]
 startLevel = 2
@@ -141,13 +138,16 @@ weight = 5
 
 [[menu.link]]
 name = "GitHub"
-url = "https://github.com/rrx"
+url = "https://github.com/dsrkafuu"
 weight = 1
-
 [[menu.link]]
-name = "LinkedIn"
-url = "https://www.linkedin.com/in/ryansadler/"
-weight = 1
+name = "Twitter"
+url = "https://twitter.com/dsrkafuu"
+weight = 2
+[[menu.link]]
+name = "bilibili"
+url = "https://space.bilibili.com/19767474"
+weight = 3
 
 [build]
 noJSConfigInAssets = true
