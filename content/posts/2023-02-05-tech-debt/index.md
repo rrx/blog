@@ -42,6 +42,7 @@ There are some specific feedback loops in the world of Technical Debt that I wou
 - Developer moral and developer churn
 - Decision making in the context of the entire system
 - "Debt Normalization"
+- Business reactions to zero marginal productivity
 
 I will discuss these individually.
 
@@ -69,14 +70,37 @@ The cost of normalization is an invisible factor.  If you ask a developer in an 
 
 It’s hard to believe that companies are able to function at all, once you’ve peeked behind the curtain and seen how the sausage is made.  Marginal productivity is approaching zero, and it makes people a bit desparate.  Large companies are able to manage quite well by hiring top talent and trying to grow their way out of the problem.  This works for a time, but actually increases the scale of the problem.  As long as the economic outlook is good, we may be able to do this indefinitely.  But that’s not likely to happen.  When a adjustment comes, a lot of large companies will find their debt unserviceable, and have to make the hard decisions.  Hiring your way out of debt is not a valid strategy, it’s a coping mechanism that will eventually fail.  We can do better than this.
 
+
+## Business reactions to zero marginal productivity
+
+The final point I want to make is about how the business responds to the condition of approaching
+zero marginal productivity.  It's important to emphasize the "marginal" part.  Because if you ask
+people in the business, overall productivity has never been higher.  But if you look at the increase
+in productivity per extra dollar spent, or per new hire, large business are seeing diminishing
+returns.  This corresponds with my observations. But it's also the premise of the book "The Mythical
+Man-Month", which is that adding programmers to an already delayed project, delays the project even
+further.  Not at all intuitive, but this makes sense in the context of the system of effects.
+
+What's troubling about what I see is that not understanding the root cause leads companies to make
+decisions that only make matters worse, or simply delay the inevitable.  Layoffs and restructuring
+are common responses to help boost dwindling productivity numbers, but they exacerbate the problem
+in the long term.
+
+The other common strategy is to obsess on short term goals and KPIs.  There's nothing inherrently
+wrong with focussing on these.  The problem arises when we focus on them at the expense of a long
+term vision and a deeper understanding of the systemic effects.  Agile encourages this behavior in
+it's sprint based focus, that pushes unknowns into an indefinite future.  Short term goals hides the
+fact that we don't have a strategy to deal with our predicament.  So we try not to think about it
+too much.
+
+## In summary
+
 Informed by this new perspective I would like to draw some conclusions:
 
 - We are underestimating the rate at which Technical Debt compounds because we do not understand (or discount) the human level feedback loops.
 - We obsess over the easy solutions that technology offers, while ignoring the human factors.  This creates a bias in decision making which is detrimental to the health of the organization as we favor easy solutions, over the hard to quantify human ones.
 - Technical Debt accumulates daily by small decisions being made by everyone in the org.  It’s not just the architects who are responsible for the solutions, everyone is doing it.
 - By not proactively addressing Technical Debt on a systems level, we expose the company to significant risk.
-
-## In summary
 
 Technical Debut poses an existential threat to software companies.  I don’t think this is an overstatement.  It sounds crazy because we look at companies that seem to have it under control, but it’s not always the case.  Smaller companies are forced to deal with this, and the solutions are pretty.  If they can make the transition they survive. Otherwise they are out of business.  With larger companies, this will happen on a larger time scale.
 
@@ -85,6 +109,8 @@ Addressing the significant problems in the industry, such as developer churn, ri
 ## References
 
 [Baker, Christopher & Gordon, Ascelin & Bode, Michael. (2016). Ensemble ecosystem modeling for predicting ecosystem response to predator reintroduction. Conservation biology : the journal of the Society for Conservation Biology. 31. 10.1111/cobi.12798.](https://www.researchgate.net/publication/305778940_Ensemble_ecosystem_modeling_for_predicting_ecosystem_response_to_predator_reintroduction)
+
+[Brooks, Frederick P., Jr. (1982). The Mythical man-month : essays on software engineering. Reading, Mass. :Addison-Wesley Pub. Co.](https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959)
 
 [Krutchten, Philippe & Nord, Robert & Ozkaya, Ipek. (2019). Managing Technical Debt: Reducing Friction in Software Development (1st. ed.). Addison-Wesley Professional.](https://dl.acm.org/doi/book/10.5555/3364312)
 
