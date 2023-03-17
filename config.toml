@@ -1,5 +1,7 @@
 baseURL = "https://rrx.github.io"
-title = "Engineering Blog"
+title = "More Code, More Problems"
+# You can also set description and images in post front matter individually
+description = "Articles about software engineering"
 
 theme = "fuji"
 hasCJKLanguage = true
@@ -64,8 +66,6 @@ showToc = true
 copyrightStartYear = "2022"
 
 # Open Graph & Twitter Card variables
-# You can also set description and images in post front matter individually
-description = "An engineering blog."
 og = "/img/og.png"                                          # This will use the image called og.png in static/img folder
 
 # Posts shown in homepage
