@@ -4,25 +4,29 @@ date: 2024-04-28T09:31:12-08:00
 draft: false
 ---
 
-When evaluating a complex software system, consider the key architectural characteristic of the contrast between microservices and monoliths. Many articles have been written on the difference between these two, but they often focus on just a the obvious. I'd like to dig a little deeper in this article. If you’re not quite clear on the distinction there’s a great article on the [AWS blog about it.](https://aws.amazon.com/compare/the-difference-between-monolithic-and-microservices-architecture/)
+When evaluating a complex software system, we must consider the architectural choice between microservices and monoliths. Many articles have been written on the difference between these two, but they mostly focus on the obvious. I'd like to dig a little deeper in this article. If you’re not quite clear on the distinction, [here is a great article.](https://aws.amazon.com/compare/the-difference-between-monolithic-and-microservices-architecture/)
 
 <!--more-->
 
 <figure>
-    <img src="./microservices.jpg" alt="battleship and container ship (sd)" loading="lazy">
+    <img src="microservices.jpg" alt="battleship and container ship (sd)" loading="lazy">
     <figcaption>battleship and container ship (sd)</figcaption>
 </figure>
 
-When we talk about the choice between microservices and monoliths, it’s presented as an either or. But most organizations have some combination of the two. A legacy monolith with more recent work in microservices. Most articles typically disparage monoliths and evangelize microservices. The bias isn’t helpful to someone who faced with the decision.
+When we talk about the choice between microservices and monoliths, it’s commonly presented as an either/or decision. However, most organizations have some combination of both monolith and microservices.  For example, a legacy monolith, with more recent work happening in microservices. Most articles tend to disparage monoliths and evangelize microservices. This bias isn’t helpful to a decision maker faced with a messy history of prior work spanning years or decades.
 
-I’d like to point out some situations where a developer may encounter this decision. Consider the following:
+Consider the following situations.  How would you make these decisions?
 
-- The microservice is no longer so micro, and it’s starting to encounter some issues. Is it time to break it up into smaller services?
+- The microservice is no longer so micro, and it’s starting to encounter some issues. Is it time to break it up into smaller services? 
 - You want to add a new feature, do you add it to one of the existing services, or do you create a new service?
-- A microservice seems to be the source of a number of bugs or outages, are there some architectural choices we can consider to improve the situation?
+- A microservice seems to be the source of a number of bugs or outages . Are there some architectural choices we can consider to improving the situation?
+- A monolith is working fine, but your manager insists that microservices are the future.  How do you convince them it is not?
 
-Let’s dig into some reasons why you might want to consider one or the other, even if you work in an organization that’s all in on microservices. The principles apply whenever you have a growing and evolving code base. The faster things are moving, the more likely you will need to make these decisions. The automatic reflex to build a new service every time you can’t find a place for something will multiply your problems. Alternatively, how can you make the case to your manager that you need to split your service? Let’s get into some principles I have used to help make this decision for myself and the teams I have worked with.
+Let’s dig into some reasons why you might want to consider one or the other, or even both!  Even if you work in an organization that’s all in on microservices, these principles still apply. Not only does a growing and evolving code base, force you to make these decisions, but the constant change in the industry can also force you reevaluate.
 
+The automatic reflex to build a new service every time you can’t find a place for something will multiply your problems. Alternatively, how can you make the case to your manager that you need to split your service?
+
+Let’s dive into some principles that have helped me make these decisions.
 ## When to consider a monolith
 
 Monoliths aren’t all bad. In fact there are some compelling advantages. Most of the added complexity can be handled through modularization (the modular monolith) and enforced with tooling or language features.
@@ -40,16 +44,16 @@ Here are some reasons to consider a monolith:
 - **Simplicity in Development**:  Often a company starts with a monolithic architecture and only migrates to microservices when the complexity of their operations necessitates it. For startups focused on getting a viable product to market swiftly, the monolith offers fewer moving parts and a lower barrier to initial development. Debugging is more straightforward when you don’t need to trace issues across network boundaries, and the overall system architecture is easier to grasp for new developers.
 
 - **Rapid Development**
-In the fast paced startup world, speed can make it or break it. A monolithic architecture allows for rapid development, and simplifies the design space. When it comes to speed, sometimes less is more. The ability to develop quickly and deploy immediately without the considerations of managing multiple services can be an advantage.
+In the fast-paced startup world, speed can make it or break it. A monolithic architecture allows for rapid development, and simplifies the design space. When it comes to speed, sometimes less is more. The ability to develop quickly and deploy immediately without the considerations of managing multiple services can be an advantage.
 
 - **When High Availability Is Not a Requirement**: Not every application needs to be available 24/7. For desktop software or applications in use solely during business hours, the high availability that microservices offer might not justify the added complexity. In such cases, if a monolithic architecture can meet you availability needs effectively, there’s no need for the added complexity of multiple services.
 
 ## When to consider microservices
 
-Considering microservices goes beyond a decision at the start of a new project.  It's something to consider as your services grow and evolve.  The are often considered when a service has become too difficult to extend or maintain.  Microservices isn't the only answer, here are some reasons you might want to condsider splitting up your monolith into microservices.
+Considering microservices goes beyond a decision at the start of a new project.  It's something to consider as your services grow and evolve.  The are often considered when a service has become too difficult to extend or maintain.  Using microservices isn't the only answer, here are some reasons you might want to consider splitting up your monolith into microservices.
 
 
-- **Managing Stack or Language Incompatibilities**: Microservices are great for integrating across diverse technologies. If your stack is getting a bit wild, a little python here, some golang there, all wrapped up with multiple targets in a Dockerfile and duck taped with bash scripts, then you might want to consider splitting it up, and setting up each project independently. This can help developers avoid the temptation to continue feeding your Frankenstein monster. Splitting it up will allow you to define clear API boundaries, and let your teams focus on their strengths.
+- **Managing Stack or Language Incompatibilities**: Microservices are great for integrating across diverse technologies. If your stack is getting a bit wild, a little python here, some Golang there, all wrapped up with multiple targets in a Dockerfile and duck taped with bash scripts, then you might want to consider splitting it up, and setting up each project independently. This can help developers avoid the temptation to continue feeding your Frankenstein monster. Splitting it up will allow you to define clear API boundaries, and let your teams focus on their strengths.
 
 - **Isolating Critical Components**: Separating services according to their criticality ensures that less critical components can fail without cascading effects on entire system. This architectural choice helps in resource allocation, preventing non-essential services from starving out critical ones.
 
