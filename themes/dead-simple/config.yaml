@@ -4,19 +4,16 @@ menu:
     - name: "<u>H</u>ome"
       url: /
       weight: 1
-    - name: "<u>A</u>bout"
+    - name: "About"
       url: /about/
       weight: 2
-    - name: "<u>A</u>rchive"
-      url: /archives/
-      weight: 3
-    - name: "<u>R</u>SS"
+    - name: "RSS"
       url: /index.xml
       weight: 4
-    - name: "<u>G</u>ithub"
+    - name: "Github"
       url: "https://github.com/rrx"
       weight: 5
-    - name: "<u>L</u>inkedIn"
+    - name: "LinkedIn"
       url: "https://www.linkedin.com/in/ryansadler/"
       weight: 6
     - name: "<u>T</u>ags"
