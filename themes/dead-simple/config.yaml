@@ -19,6 +19,12 @@ menu:
     - name: "<u>L</u>inkedIn"
       url: "https://www.linkedin.com/in/ryansadler/"
       weight: 6
+    - name: "<u>T</u>ags"
+      url: "/tags"
+      weight: 6
+
+taxonomies:
+  tag: tags
 
 markup:
   highlight:
