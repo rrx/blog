@@ -2,6 +2,8 @@
 title: "Expectations of a Staff Software Developer"
 date: 2024-05-26T14:13:16-07:00
 draft: false
+tags: 
+- staff-eng
 ---
 
 
@@ -136,7 +138,7 @@ Unfortunately you don’t always get to choose the managers you work with, and n
 
 Being a staff software developer is a challenging role that extends beyond technical expertise. It requires a blend of strategic thinking, autonomy, proactive communication, relationship-building, and a keen understanding of both explicit and implicit expectations within an organization.
 
-This is just the start. Stay vigilant for unspoken expectations, and feel free to connect with me on LinkedIn if you think I missed something. I hope this post has been helpful for current staff engineers and those aspiring to the role. All the best in achieving your goals and building up your teams.
+This is just the start. Stay vigilant for unspoken expectations, and feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/ryansadler/) if you think I missed something. I hope this post has been helpful for current staff engineers and those aspiring to the role. All the best in achieving your goals and building up your teams.
 
 
 
