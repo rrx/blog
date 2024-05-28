@@ -3,3 +3,6 @@ resources
 *.bak
 *.lock
 styles
+build
+venv
+__pycache__

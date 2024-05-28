@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}" class="dark">
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>{% block title %}{{ title }}{% endblock %}</title>
+<meta name="author" content="{{ author }}" />
+<meta name="description" content="{% block description %}{{ description }}{% endblock %}" />
+<meta name="keywords" content="{{ tags }}" />
+<link href="/css/output.css" rel="stylesheet">
+<link href="/css/dark.css" rel="stylesheet">
+
+</head>
+
+<body class="m-2 dark:bg-slate-900 print:px-4">
+    <header class="md:px-40 lg:px-80 border-b border-slate-100 print:px-0">
+    <h1 class="font-semibold my-4 dark:text-slate-200 text-2xl"><a href="/">{{site.title}}</a></h1>
+    <h2 class="font-semibold my-4 dark:text-slate-200 text-sm">{{site.description}}</h2>
+    </header>
+    <div class="bg-slate w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row print:w-full print:px-2">
+
+    <aside class="hidden md:w-1/3 lg:w-1/4 py-4 md:block print:hidden">
+	<div class="sticky top-12 print:hidden">
+        {% if links %}
+        <div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border rounded-xl">
+	    <h1 class="font-semibold dark:text-slate-200  text-2xl">Links</h1>
+	    {% for level, id, link_title in links %}
+	    <a href="{{ id }}" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+	    {{ link_title }}
+            </a>
+	    {% endfor %}
+	</div>
+	{% endif %}
+
+        {% if toc %}
+        <div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border rounded-xl">
+	    <h1 class="font-semibold dark:text-slate-200  text-2xl">Table of Contents</h1>
+	    {% for level, id, link_title in toc %}
+	    <a href="{{ id }}" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+	    {{ link_title }}
+            </a>
+	    {% endfor %}
+	</div>
+	{% endif %}
+
+        {% if tags %}
+        <div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border rounded-xl">
+	    <h1 class="font-semibold dark:text-slate-200 text-2xl">Tags</h1>
+	    {% for tag in tags %}
+	    <a href="/tags/{{ tag }}" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+		    {{tag}}
+            </a>
+	    {% endfor %}
+	</div>
+	{% endif %}
+	</div>
+    </aside>
+
+    <main class="md:w-2/3 lg:w-3/4 w-full py-1 min-h-screen print:w-full">
+        <div class="bg-slate">
+	    <div class="">
+               {% block body %}{% endblock %}
+            </div>
+	    <p class="border-t my-10 dark:text-slate-200">
+	    <span>&copy; 2023-2024<span>
+	    </p>
+        </div>
+    </main>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/0.5.6/dist/mermaid.css">
+
+    <script>
+	    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+    </script>
+    {% include "test/livereload.html" %}
+
+</body>
+
+</html>
+

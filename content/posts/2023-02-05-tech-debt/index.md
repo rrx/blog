@@ -2,7 +2,11 @@
 title: "Technical Debt, A Systems Level Problem"
 date: 2023-02-05T19:33:40-08:00
 draft: false
+thumbnail: "wolf_and_elk.jpg"
 ---
+
+![wolf and elk](./wolf_and_elk.jpg)
+
 
 I just finished reading ["Managing Technical Debt"](https://dl.acm.org/doi/book/10.5555/3364312), and while it provides some excellent ideas on the topic, I felt like it was missing something vital.  The book focuses primarily on the technical side of the problem.  The human factors however, are just as important.  Not including them in our assessments is a major reason why we have so much trouble assessing the true cost of our technical debt.  I think this omission is common in the industry, and I think it's time to change that.
 

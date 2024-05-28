@@ -2,6 +2,7 @@
 title: "Hot-Reloading like it's 1972"
 date: 2023-02-13T00:00:00-08:00
 draft: false
+thumbnail: "smalltalk.png"
 ---
 
 TL;DR Here's a sketch of a solution for hot-reloading that I hope will bring some greater flow to my
