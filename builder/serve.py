@@ -9,7 +9,7 @@ from flask_socketio import SocketIO
 
 import builder
 
-FILE_DIRECTORY = os.path.abspath("build")
+FILE_DIRECTORY = os.path.abspath("public")
 app = Flask(__name__)
 socketio = SocketIO(app)
 

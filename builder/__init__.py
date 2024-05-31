@@ -17,6 +17,8 @@ import yaml
 from markdown_it import MarkdownIt
 from mdit_plain.renderer import RendererPlain
 
+FILE_DIRECTORY = os.path.abspath("public")
+
 
 class SyntaxHighlightRenderer(mistune.HTMLRenderer):
     def block_code(self, code, info=None):
@@ -67,7 +69,9 @@ def copy_static(path):
     for root, _, files in os.walk(path):
         for filename in files:
             full_path = os.path.join(root, filename)
-            out_filename = os.path.join("build", os.path.relpath(full_path, start=path))
+            out_filename = os.path.join(
+                FILE_DIRECTORY, os.path.relpath(full_path, start=path)
+            )
             os.makedirs(os.path.dirname(out_filename), exist_ok=True)
             print("COPY", full_path, out_filename)
             shutil.copyfile(full_path, out_filename)
@@ -110,7 +114,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
 
     for ext, f in markdown_files:
         if ext in ["jpg", "jpeg", "gif", "png", "svg"]:
-            out_filename = os.path.join("build", os.path.relpath(f, start=path))
+            out_filename = os.path.join(FILE_DIRECTORY, os.path.relpath(f, start=path))
             print("COPY", f, out_filename)
             os.makedirs(os.path.dirname(out_filename), exist_ok=True)
             shutil.copyfile(f, out_filename)
@@ -162,7 +166,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
         if post["is_post"]:
             out_posts.append(post)
 
-        build_filename = os.path.join("build", post["link_path"])
+        build_filename = os.path.join(FILE_DIRECTORY, post["link_path"])
         os.makedirs(os.path.dirname(build_filename), exist_ok=True)
         print("COMPILE", post["source"], build_filename)
         with open(build_filename, "w") as fp:
@@ -177,19 +181,19 @@ def _parse_tree(path, template_dir, layout, **kwargs):
     # Home Page
     template = env.get_template("test/home.html")
     html = template.render(**kwargs)
-    with open(os.path.join("build", "index.html"), "w") as fp:
+    with open(os.path.join(FILE_DIRECTORY, "index.html"), "w") as fp:
         fp.write(html)
 
     # Simple templates
     for template_name in ["404.html", "test_page.html"]:
         template = env.get_template(os.path.join("pages", template_name))
         html = template.render(**kwargs)
-        with open(os.path.join("build", template_name), "w") as fp:
+        with open(os.path.join(FILE_DIRECTORY, template_name), "w") as fp:
             fp.write(html)
 
     for tag, posts in tags.items():
         template = env.get_template("test/tag.html")
-        build_filename = os.path.join("build", "tags", tag) + ".html"
+        build_filename = os.path.join(FILE_DIRECTORY, "tags", tag) + ".html"
         kwargs = dict(
             title=tag,
             posts=list(sorted(posts, key=lambda x: x["date"], reverse=True)),
