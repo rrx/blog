@@ -1,0 +1,12 @@
+{% extends "test/base.html" %}
+
+{% block title %}{{ site.title }}{% endblock %}
+{% block description %}{{ site.description }}{% endblock %}
+
+{% block body %}
+    <div class="">
+    {% for post in posts %}
+    {% include "partials/teaser.html" %}
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,6 +1,7 @@
 ---
 title: "New code base, where to start?"
 date: 2023-03-15T19:41:02-07:00
+thumbnail: "engine.jpg"
 draft: false
 ---
 
@@ -38,7 +39,7 @@ Now let's compare this with some of the work I saw a few years ago at the [Minia
 Craftsmanship Museum in Carlsbad](https://craftsmanshipmuseum.com/artisan/young-c-park/).
 Here's a picture of a custom made radial model airplane engine. I find this so beautiful.
 
-![Photo by author](engine.jpg)
+![Photo by author](./engine.jpg)
 
 Both are complex and achieve their purpose, but one has this sense of purpose and cohesion that
 stirs something in the soul.
@@ -68,12 +69,13 @@ faced with code that fills you with dread.
 
 ## Visualize and Revise Dependencies
 
-<b>Use a dependency visualization tool and take a look at what modules are importing.</b>
+**Use a dependency visualization tool and take a look at what modules are importing.**
 
 Be sure to take a snapshot of what your code looks like before you start, so you have something to compare your work against.  It’s a very satisfying feeling to see your graph simplify and start to make sense.  Here's my before diagram:
 
-<em>Before</em>
-![Before](before.svg)
+**Before**
+
+![Before](./before.svg)
 
 Some things to look for:
 
@@ -91,8 +93,8 @@ At this stage, we don’t want to make any major changes. We are just moving thi
 
 Here's my after diagram, looking much more sane.
 
-<em>After</em>
-![After](after.svg)
+**After**
+![After](./after.svg)
 
 I did a little research an found some tools that work for the languages I use most.  Here they are:
 
@@ -159,7 +161,7 @@ the README, or leave a TODO in the code.
 
 ## Use a linter
 
-<b>Turn on linters and track cyclomatic complexity.</b>
+**Turn on linters and track cyclomatic complexity.**
 
 I find linters really helps clean things up.  I can't believe the
 problems linters find.  Often bugs are uncovered, and it draws my attention to the parts that can

@@ -2,11 +2,14 @@
 title: "Expectations of a Staff Software Developer"
 date: 2024-05-26T14:13:16-07:00
 draft: false
+thumbnail: image.jpg
 tags: 
 - staff-eng
 ---
 
 Becoming a staff software developer is a significant milestone in a developer’s career. This role is often seen as the bridge between hands-on coding and higher-level strategic responsibilities. It’s a position that requires not only technical prowess but also the ability to influence, guide, and lead a team towards success. 
+
+<!--more-->
 
 ![Cyberbunk jugglers (Stable Diffusion)](./image.jpg)
 

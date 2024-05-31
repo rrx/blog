@@ -1,0 +1,12 @@
+pyyaml
+jinja2
+pygments
+mistune
+python-frontmatter
+flask
+flask-socketio
+watchfiles
+markdown-it-py
+mdit-plain
+humanize
+python-dateutil
