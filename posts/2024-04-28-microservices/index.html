@@ -1,9 +1,345 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=HandheldFriendly content="True"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=generator content="Hugo 0.126.1"><link rel="shortcut icon" href=/favicon.ico><title>Microservices and Monoliths: More than you think - More Code, More Problems</title>
-<meta name=author content="rrx"><meta property="og:title" content="Microservices and Monoliths: More than you think"><meta name=twitter:title content="Microservices and Monoliths: More than you think"><meta property="og:type" content="article"><meta property="og:url" content="https://rrx.github.io/posts/2024-04-28-microservices/"><meta property="og:description" content="When evaluating a complex software system, we must consider the architectural choice between microservices and monoliths. Many articles have been written on the difference between these two, but they mostly focus on the obvious. I&rsquo;d like to dig a little deeper in this article. If you’re not quite clear on the distinction, here is a great article."><meta name=twitter:description content="When evaluating a complex software system, we must consider the architectural choice between microservices and monoliths. Many articles have been written on the difference between these two, but they mostly focus on the obvious. I&rsquo;d like to dig a little deeper in this article. If you’re not quite clear on the distinction, here is a great article."><meta property="og:image" content="https://rrx.github.io/img/og.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://rrx.github.io/img/og.png"><meta property="article:published_time" content="2024-04-28T09:31:12-08:00"><meta property="article:modified_time" content="2024-04-28T09:31:12-08:00"><style>@media(prefers-color-scheme:dark){body[data-theme=auto] img{filter:brightness(60%)}}body[data-theme=dark] img{filter:brightness(60%)}</style><link rel=stylesheet href=https://rrx.github.io/assets/css/fuji.min.css></head><body data-theme=dark data-theme-auto=false><script data-cfasync=false>var fujiThemeData=localStorage.getItem("fuji_data-theme");fujiThemeData?fujiThemeData!=="auto"&&document.body.setAttribute("data-theme",fujiThemeData==="dark"?"dark":"light"):localStorage.setItem("fuji_data-theme","auto")</script><header><div class="container-lg clearfix"><div class="col-12 header"><a class=title-main href=https://rrx.github.io/>More Code, More Problems</a>
-<span class=title-sub>A software engineering blog</span></div></div></header><main><div class="container-lg clearfix"><div class="col-12 col-md-9 float-left content"><article><h2 class="post-item post-title"><a href=https://rrx.github.io/posts/2024-04-28-microservices/>Microservices and Monoliths: More than you think</a></h2><div class="post-item post-meta"><span><i class="iconfont icon-today-sharp"></i>&nbsp;2024-04-28</span>
-<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1733 words</span>
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span></div><div class="post-content markdown-body"><p>When evaluating a complex software system, we must consider the architectural choice between microservices and monoliths. Many articles have been written on the difference between these two, but they mostly focus on the obvious. I&rsquo;d like to dig a little deeper in this article. If you’re not quite clear on the distinction, <a href=https://aws.amazon.com/compare/the-difference-between-monolithic-and-microservices-architecture/ target=_blank>here is a great article.</a></p><figure><img src=microservices.jpg alt="battleship and container ship (sd)" loading=lazy><figcaption>battleship and container ship (sd)</figcaption></figure><p>When we talk about the choice between microservices and monoliths, it’s commonly presented as an either/or decision. However, most organizations have some combination of both monolith and microservices. For example, a legacy monolith, with more recent work happening in microservices. Most articles tend to disparage monoliths and evangelize microservices. This bias isn’t helpful to a decision maker faced with a messy history of prior work spanning years or decades.</p><p>Consider the following situations. How would you make these decisions?</p><ul><li>The microservice is no longer so micro, and it’s starting to encounter some issues. Is it time to break it up into smaller services?</li><li>You want to add a new feature, do you add it to one of the existing services, or do you create a new service?</li><li>A microservice seems to be the source of a number of bugs or outages . Are there some architectural choices we can consider to improving the situation?</li><li>A monolith is working fine, but your manager insists that microservices are the future. How do you convince them it is not?</li></ul><p>Let’s dig into some reasons why you might want to consider one or the other, or even both! Even if you work in an organization that’s all in on microservices, these principles still apply. Not only does a growing and evolving code base, force you to make these decisions, but the constant change in the industry can also force you to reevaluate.</p><p>The automatic reflex to build a new service every time you can’t find a place for something will multiply your problems. Alternatively, how can you make the case to your manager that you need to split your service?</p><p>Let’s dive into some principles that have helped me make these decisions.</p><h2 id=when-to-consider-a-monolith>When to consider a monolith</h2><p>Monoliths aren’t all bad. In fact, there are some compelling advantages. Most of the dreaded complexity in monoliths can be handled through modularization (the modular monolith) and enforced with tooling or language features.</p><p>For example, a monolith can include all the features you expect from microservices. When your service spans multiple domains, or handles a variety of requests, it might look like a caterpillar wanting to become a butterfly. While it&rsquo;s tempting to split these pieces out, keeping them together isn’t always a bad idea. A tight coupling between components and provide simplicity and performance. The right choice depends on your circumstances.</p><p>Here are some reasons to consider a monolith:</p><ul><li><p><strong>Longer Release Cycles</strong>: If your team works with extended release cycles, say every two weeks or more, and there’s no imminent shift towards continuous delivery, a monolith might serve you better. Consider the QA process: testing a single, cohesive artifact or appliance can be simpler and more straightforward than wrestling with multiple microservices. The integrated nature of a monolith ensures that all components interact within the same environment, significantly simplifying integration testing.</p></li><li><p><strong>Standardized Tech Stack</strong>: Monoliths shine in environments with a uniform tech stack. Leveraging the full feature set of a single programming language to manage different components of your application can offer a robust composition layer, avoiding the overhead of remote procedure calls typical in microservice architectures. Moreover, if your development team isn&rsquo;t huge or highly skilled, having a single stack reduces the learning curve and fosters better understanding and collaboration among team members. Languages that have strong support for modular programming can help create API boundaries within the monolith, making interfaces explicit, and implementations subject to change. All of this without the operational complexity of microservices.</p></li><li><p><strong>Performance Critical Software</strong>: For applications where performance is paramount, like the demand for low-latency requests in financial transactions, the potential performance gains of a monolith can be significant. When an entire application runs on a single system, the network overhead of microservices can be minimized. Having fewer networked dependencies means fewer things can break, giving a potential boost to reliability in failure sensitive situations.</p></li><li><p><strong>Simplicity in Development</strong>: Often a company starts with a monolith and only migrates to microservices when the complexity of their operations requires it. For startups focused on rapidly iterating until they find their market fit, the monolith offers fewer moving parts and a lower barrier to initial development. Debugging is more straightforward when you don’t need to trace issues across network boundaries, and the overall system architecture is easier to grasp for new developers. This simplicity can yield significant productivity gains in situations where margins are low, or capital is limited.</p></li><li><p><strong>When High Availability Is Not a Requirement</strong>: Not every application needs to be available 24/7. For desktop software or applications used solely during business hours, the promise of high availability that microservices offer may not justify the burden. In such cases, if a monolithic architecture can meet your availability needs effectively, why make it more complicated?</p></li></ul><h2 id=when-to-consider-microservices>When to consider microservices</h2><p>Considering microservices goes beyond the decision at the start of a new project. It&rsquo;s something to consider as your services grow and evolve. When a service has become too difficult to extend or maintain, we must challenge our initial architectural assumptions. Using microservices isn&rsquo;t the only answer, here are some reasons you might want to consider splitting up your monolith into microservices. Or if you have an unwieldy microservice, splitting it up into smaller units.</p><ul><li><p><strong>Managing Stack or Language Incompatibilities</strong>: Microservices are great for integrating across diverse technologies. Is your stack is getting a bit wild? A little python here, some Golang there, all wrapped up with multiple targets in a Dockerfile, then duck taped with bash scripts? You might want to consider splitting that beast up, and avoid the temptation to continually feed more hacks to your Frankenstein monster. Splitting it up can provide more clear API boundaries, and provide independent units of deployment. This may be a good time to reconsider your original stack or language choices to see if they still apply.</p></li><li><p><strong>Isolating Critical Components</strong>: Separating services according to their criticality ensures that less critical components can fail without cascading effects. In particular, service separation can isolate resource utilization. For example, you have a queue consumer that has large variations in memory usage, and a web service that has fixed resource usage. By splitting these two up, you can prevent the consumer from causing out of memory errors on unrelated parts of the code.</p></li><li><p><strong>Life cycle Differences</strong>: Does your service change frequently? Sometimes many times a day? Microservices can provide isolation for parts of the system that change at different rates. Services that require frequent updates or have many volatile dependencies can be updated separately, reducing the risk to more stable parts. An example might be a service that has a stable set of APIs, but there&rsquo;s active development on new features. Splitting the service can provide greater stability to the existing system, while reducing the pressure on current development to not break anything.</p></li><li><p><strong>Stable and Compatible APIs</strong>: Microservices can be used to define and enforce API compatibility, preventing breaking changes to existing API clients. You can use this trick with monoliths as well, but it&rsquo;s more commonly seen in microservices. Tools like gRPC, Thrift, and GraphQL not only facilitate building and consuming APIs, but with some additional tooling you can check at build time that your API is compatible across all versions of your product. This is especially helpful with mobile clients that have longer release cycles.</p></li><li><p><strong>API Usage Patterns</strong>: Microservices enable tailored scaling and optimization strategies based on specific usage patterns. For example, long-lived requests, and low latency requests can be better optimized with separate services, through the choice of language, scaling, or resource limits. Requests that are core to your application and affect the majority of your user base might be best kept separate from more experimental or risky changes.</p></li><li><p><strong>Data Requirements and Regulatory Compliance</strong>: In scenarios with stringent data handling or compliance regulations like GDPR or FedRAMP, microservices can allow for clear segregation of data, aligning architecture with compliance needs.</p></li><li><p><strong>Reduce Complexity</strong>: While microservices are often associated with increased complexity, they better used to manage complexity. Decomposing your system into self-contained services can actually help encapsulate difficult parts of the system. This can reduce cognitive load when reasoning about the system as a whole.</p></li><li><p><strong>Deploy Contention</strong>: In highly active development environments where deployment pipelines become congested, microservices offer a way out, by allowing teams to deploy their work independently. In my experience, this is often the final straw that forces a decision to split a service up.</p></li><li><p><strong>Blast Radius</strong>: The concept of &lsquo;blast radius&rsquo; refers to the extent of impact a failure can have on the wider system. Microservices help limit blast radius by isolating failures to individual services. But beware, microservices are also well known for causing cascading failures, and rather than limiting blast radius, your entire system can be at risk. A well planned system can avoid these problems.</p></li><li><p><strong>Cleanly Separated Domains</strong>: Microservices encourage the separation of business capabilities into distinct domains, each with its own database and service environment. This is closely related to <a href=https://en.wikipedia.org/wiki/Domain-driven_design target=_blank>Domain Driven Design (DDD)</a>, which benefits from microservices by aligning service boundaries with domain boundaries.</p></li></ul><h2 id=conclusion>Conclusion</h2><p>I hope this article gave you a some ideas you can apply to your specific circumstances. These are just the considerations I have thought about, and I&rsquo;m sure there&rsquo;s more. Remember, it&rsquo;s not black and white, and it&rsquo;s worth considering both options. What will work for you depends entirely on your situation. The fun part of software is having the power and flexibility to build things just right.</p><p>Here are some thoughts to end with:</p><ul><li>Not every situation requires Google level architecture. If you find yourself working on a monolith, consider the advantages to doing so.</li><li>Has your microservice has grown beyond your comfort zone? Think things though. It might be fine as is, though you might want to modularize things nonetheless.</li><li>If everyone is complaining about how long it takes to get code deployed, splitting up the code could help you. Or it might just bankrupt your company. As always, think it through.</li></ul><p>No easy answers, just lots to think about. Thanks for reading.</p></div></article></div><aside class="col-12 col-md-3 float-left sidebar"><div class="sidebar-item sidebar-pages"><h3>Pages</h3><ul><li><a href=/>Home</a></li><li><a href=/archives/>Archives</a></li><li><a href=/about/>About</a></li><li><a href=/search/>Search</a></li><li><a href=/index.xml>RSS</a></li></ul></div><div class="sidebar-item sidebar-links"><h3>Links</h3><ul><li><a href=https://github.com/rrx target=_blank><span>GitHub</span></a></li><li><a href=https://www.linkedin.com/in/ryansadler/ target=_blank><span>LinkedIn</span></a></li></ul></div><div class="sidebar-item sidebar-tags"><h3>Tags</h3><div><span><a href=/tags/staff-eng/>Staff-Eng</a></span></div></div><div class="sidebar-item sidebar-toc"><h3>Table of Contents</h3><nav id=TableOfContents><ul><li><a href=#when-to-consider-a-monolith>When to consider a monolith</a></li><li><a href=#when-to-consider-microservices>When to consider microservices</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div></aside></div><div class=btn><div class=btn-menu id=btn-menu><i class="iconfont icon-grid-sharp"></i></div><div class=btn-toggle-mode><i class="iconfont icon-contrast-sharp"></i></div><div class=btn-scroll-top><i class="iconfont icon-chevron-up-circle-sharp"></i></div></div><aside class=sidebar-mobile style=display:none><div class=sidebar-wrapper><div class="sidebar-item sidebar-pages"><h3>Pages</h3><ul><li><a href=/>Home</a></li><li><a href=/archives/>Archives</a></li><li><a href=/about/>About</a></li><li><a href=/search/>Search</a></li><li><a href=/index.xml>RSS</a></li></ul></div><div class="sidebar-item sidebar-links"><h3>Links</h3><ul><li><a href=https://github.com/rrx target=_blank><span>GitHub</span></a></li><li><a href=https://www.linkedin.com/in/ryansadler/ target=_blank><span>LinkedIn</span></a></li></ul></div><div class="sidebar-item sidebar-tags"><h3>Tags</h3><div><span><a href=/tags/staff-eng/>Staff-Eng</a></span></div></div><div class="sidebar-item sidebar-toc"><h3>Table of Contents</h3><nav id=TableOfContents><ul><li><a href=#when-to-consider-a-monolith>When to consider a monolith</a></li><li><a href=#when-to-consider-microservices>When to consider microservices</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div></div></aside></main><footer><div class="container-lg clearfix"><div class="col-12 footer"><p>Unless otherwise noted, the content of this site is copyrighted by the author<a rel=license href target=_blank></a>.</p><span>&copy; 2022-2024
-<a href=https://rrx.github.io/>rrx</a>
-| <a href=https://github.com/rrx/blog>Source code</a>
-| Powered by
-<a href=https://gohugo.io/ target=_blank>Hugo</a></span></div></div></footer><script defer src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1.27.0/components/prism-core.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1.27.0/plugins/autoloader/prism-autoloader.min.js></script><script defer src=/assets/js/fuji.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css><script src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js></script><script>renderMathInElement(document.querySelector("div.content"),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})</script></body></html>
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="HandheldFriendly" content="True" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Cache-Control" content="no-transform" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<title>Microservices and Monoliths: More than you think</title>
+		<meta name="author" content="" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="['architecture', 'staff-eng']" />
+		<link href="/css/output.css" rel="stylesheet">
+		<link href="/css/dark.css" rel="stylesheet">
+		<script src="https://unpkg.com/alpinejs"></script>
+
+	</head>
+
+	<body class="m-2 dark:bg-slate-900 print:px-4">
+		<div x-data="{ showModal: false }" x-on:keydown.window.escape="showModal = false">
+
+			<header class="md:px-40 lg:px-80 print:px-0">
+				<h1 class="font-semibold my-0 dark:text-slate-200 text-2xl"><a href="/">More Code, More Problems</a></h1>
+				<h2 class="relative font-semibold mb-2 dark:text-slate-200 text-l">
+					A software engineering blog
+					<div class="lg:hidden fixed inset-y-0 right-0">
+						<button x-on:click="showModal = !showModal" class="inline-flex gap-2 rounded-lg border border-slate-300 bg-slate px-3 py-1 text-center text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-100 focus:ring focus:ring-slate-100 disabled:cursor-not-allowed disabled:border-slate-100 disabled:bg-slate-50 disabled:text-slate-400">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+							</svg>
+						</button>
+					</div>
+				</h2>
+			</header>
+
+			<div class="bg-slate w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row print:w-full print:px-2">
+
+				<aside class="hidden md:w-1/3 lg:w-1/4 py-4 md:block print:hidden">
+					<div class="sticky top-12 print:hidden">
+	<div class="lg:hidden relative">
+		<div class="absolute right-0 inset-y-0">
+			<button type="button" x-on:click="showModal = false" 
+				class="inline-flex gap-2 bg-slate px-3 py-1 text-center text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-100 focus:ring focus:ring-slate-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="h-6 w-6">
+					<path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+				</svg>
+			</button>
+		</div>
+	</div>
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b">
+		<h1 class="font-semibold dark:text-slate-200  text-2xl">Links</h1>
+		
+		<a href="/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			Home
+		</a>
+		
+		<a href="/about/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			About
+		</a>
+		
+		<a href="https://github.com/rrx"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			GitHub
+		</a>
+		
+		<a href="https://www.linkedin.com/in/ryansadler/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			LinkedIn
+		</a>
+		
+	</div>
+	
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b"
+		<h1 class="font-semibold dark:text-slate-200  text-2xl">Table of Contents</h1>
+		
+		<a href="#toc_1"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			When to consider a monolith
+		</a>
+		
+		<a href="#toc_2"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			When to consider microservices
+		</a>
+		
+		<a href="#toc_3"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			Conclusion
+		</a>
+		
+	</div>
+	
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b">
+		<h1 class="font-semibold dark:text-slate-200 text-2xl">Tags</h1>
+		
+		<a href="/tags/architecture" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			architecture
+		</a>
+		
+		<a href="/tags/staff-eng" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			staff-eng
+		</a>
+		
+	</div>
+	
+</div>
+				</aside>
+
+				<main class="md:w-2/3 lg:w-3/4 w-full py-1 min-h-screen print:w-full">
+					<div class="bg-slate">
+						<div class="">
+    <h1 class="text-slate-100 mt-2 text-2xl">Microservices and Monoliths: More than you think</h1>
+    <b class="text-slate-100 text-xl">Posted: 2024-04-28</b>
+    
+    <p class="text-slate-100 border-t">
+			Tags: 
+			
+			<a href="/tags/architecture" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">
+				architecture
+			</a>
+			
+		</p>
+    
+    <div class="content">
+    <div class="border-t">
+    <p>When evaluating a complex software system, we must consider the architectural choice between microservices and monoliths. Many articles have been written on the difference between these two, but they mostly focus on the obvious. I'd like to dig a little deeper in this article. If you’re not quite clear on the distinction, <a href="https://aws.amazon.com/compare/the-difference-between-monolithic-and-microservices-architecture/">here is a great article.</a></p>
+<figure>
+    <img src="microservices.jpg" alt="battleship and container ship (sd)" loading="lazy">
+    <figcaption>battleship and container ship (sd)</figcaption>
+</figure>
+
+<p>When we talk about the choice between microservices and monoliths, it’s commonly presented as an either/or decision. However, most organizations have some combination of both monolith and microservices.  For example, a legacy monolith, with more recent work happening in microservices. Most articles tend to disparage monoliths and evangelize microservices. This bias isn’t helpful to a decision maker faced with a messy history of prior work spanning years or decades.</p>
+<p>Consider the following situations.  How would you make these decisions?</p>
+<ul>
+<li>The microservice is no longer so micro, and it’s starting to encounter some issues. Is it time to break it up into smaller services?</li>
+<li>You want to add a new feature, do you add it to one of the existing services, or do you create a new service?</li>
+<li>A microservice seems to be the source of a number of bugs or outages . Are there some architectural choices we can consider to improving the situation?</li>
+<li>A monolith is working fine, but your manager insists that microservices are the future.  How do you convince them it is not?</li>
+</ul>
+<p>Let’s dig into some reasons why you might want to consider one or the other, or even both!  Even if you work in an organization that’s all in on microservices, these principles still apply. Not only does a growing and evolving code base, force you to make these decisions, but the constant change in the industry can also force you to reevaluate.</p>
+<p>The automatic reflex to build a new service every time you can’t find a place for something will multiply your problems. Alternatively, how can you make the case to your manager that you need to split your service?</p>
+<p>Let’s dive into some principles that have helped me make these decisions.</p>
+<h2 id="toc_1">When to consider a monolith</h2>
+<p>Monoliths aren’t all bad. In fact, there are some compelling advantages. Most of the dreaded complexity in monoliths can be handled through modularization (the modular monolith) and enforced with tooling or language features.</p>
+<p>For example, a monolith can include all the features you expect from microservices. When your service spans multiple domains, or handles a variety of requests, it might look like a caterpillar wanting to become a butterfly. While it's tempting to split these pieces out, keeping them together isn’t always a bad idea.  A tight coupling between components and provide simplicity and performance.  The right choice depends on your circumstances.</p>
+<p>Here are some reasons to consider a monolith:</p>
+<ul>
+<li><p><strong>Longer Release Cycles</strong>: If your team works with extended release cycles, say every two weeks or more, and there’s no imminent shift towards continuous delivery, a monolith might serve you better. Consider the QA process: testing a single, cohesive artifact or appliance can be simpler and more straightforward than wrestling with multiple microservices. The integrated nature of a monolith ensures that all components interact within the same environment, significantly simplifying integration testing.</p>
+</li>
+<li><p><strong>Standardized Tech Stack</strong>: Monoliths shine in environments with a uniform tech stack. Leveraging the full feature set of a single programming language to manage different components of your application can offer a robust composition layer, avoiding the overhead of remote procedure calls typical in microservice architectures. Moreover, if your development team isn't huge or highly skilled, having a single stack reduces the learning curve and fosters better understanding and collaboration among team members. Languages that have strong support for modular programming can help create API boundaries within the monolith, making interfaces explicit, and implementations subject to change.  All of this without the operational complexity of microservices.</p>
+</li>
+<li><p><strong>Performance Critical Software</strong>: For applications where performance is paramount, like the demand for low-latency requests in financial transactions, the potential performance gains of a monolith can be significant. When an entire application runs on a single system, the network overhead of microservices can be minimized.  Having fewer networked dependencies means fewer things can break, giving a potential boost to reliability in failure sensitive situations.</p>
+</li>
+<li><p><strong>Simplicity in Development</strong>: Often a company starts with a monolith and only migrates to microservices when the complexity of their operations requires it. For startups focused on rapidly iterating until they find their market fit, the monolith offers fewer moving parts and a lower barrier to initial development. Debugging is more straightforward when you don’t need to trace issues across network boundaries, and the overall system architecture is easier to grasp for new developers.  This simplicity can yield significant productivity gains in situations where margins are low, or capital is limited.</p>
+</li>
+<li><p><strong>When High Availability Is Not a Requirement</strong>: Not every application needs to be available 24/7. For desktop software or applications used solely during business hours, the promise of high availability that microservices offer may not justify the burden. In such cases, if a monolithic architecture can meet your availability needs effectively, why make it more complicated?</p>
+</li>
+</ul>
+<h2 id="toc_2">When to consider microservices</h2>
+<p>Considering microservices goes beyond the decision at the start of a new project.  It's something to consider as your services grow and evolve.  When a service has become too difficult to extend or maintain, we must challenge our initial architectural assumptions.  Using microservices isn't the only answer, here are some reasons you might want to consider splitting up your monolith into microservices.  Or if you have an unwieldy microservice, splitting it up into smaller units.</p>
+<ul>
+<li><p><strong>Managing Stack or Language Incompatibilities</strong>: Microservices are great for integrating across diverse technologies. Is your stack is getting a bit wild? A little python here, some Golang there, all wrapped up with multiple targets in a Dockerfile, then duck taped with bash scripts?  You might want to consider splitting that beast up, and avoid the temptation to continually feed more hacks to your Frankenstein monster. Splitting it up can provide more clear API boundaries, and provide independent units of deployment.  This may be a good time to reconsider your original stack or language choices to see if they still apply.</p>
+</li>
+<li><p><strong>Isolating Critical Components</strong>: Separating services according to their criticality ensures that less critical components can fail without cascading effects. In particular, service separation can isolate resource utilization.  For example, you have a queue consumer that has large variations in memory usage, and a web service that has fixed resource usage.  By splitting these two up, you can prevent the consumer from causing out of memory errors on unrelated parts of the code.</p>
+</li>
+<li><p><strong>Life cycle Differences</strong>: Does your service change frequently? Sometimes many times a day? Microservices can provide isolation for parts of the system that change at different rates. Services that require frequent updates or have many volatile dependencies can be updated separately, reducing the risk to more stable parts.  An example might be a service that has a stable set of APIs, but there's active development on new features.  Splitting the service can provide greater stability to the existing system, while reducing the pressure on current development to not break anything.</p>
+</li>
+<li><p><strong>Stable and Compatible APIs</strong>: Microservices can be used to define and enforce API compatibility, preventing breaking changes to existing API clients. You can use this trick with monoliths as well, but it's more commonly seen in microservices. Tools like gRPC, Thrift, and GraphQL not only facilitate building and consuming APIs, but with some additional tooling you can check at build time that your API is compatible across all versions of your product.  This is especially helpful with mobile clients that have longer release cycles.</p>
+</li>
+<li><p><strong>API Usage Patterns</strong>: Microservices enable tailored scaling and optimization strategies based on specific usage patterns.  For example, long-lived requests, and low latency requests can be better optimized with separate services, through the choice of language, scaling, or resource limits.  Requests that are core to your application and affect the majority of your user base might be best kept separate from more experimental or risky changes.</p>
+</li>
+<li><p><strong>Data Requirements and Regulatory Compliance</strong>: In scenarios with stringent data handling or compliance regulations like GDPR or FedRAMP, microservices can allow for clear segregation of data, aligning architecture with compliance needs.</p>
+</li>
+<li><p><strong>Reduce Complexity</strong>: While microservices are often associated with increased complexity, they better used to manage complexity. Decomposing your system into self-contained services can actually help encapsulate difficult parts of the system. This can reduce cognitive load when reasoning about the system as a whole.</p>
+</li>
+<li><p><strong>Deploy Contention</strong>: In highly active development environments where deployment pipelines become congested, microservices offer a way out, by allowing teams to deploy their work independently. In my experience, this is often the final straw that forces a decision to split a service up.</p>
+</li>
+<li><p><strong>Blast Radius</strong>: The concept of 'blast radius' refers to the extent of impact a failure can have on the wider system. Microservices help limit blast radius by isolating failures to individual services. But beware, microservices are also well known for causing cascading failures, and rather than limiting blast radius, your entire system can be at risk. A well planned system can avoid these problems.</p>
+</li>
+<li><p><strong>Cleanly Separated Domains</strong>: Microservices encourage the separation of business capabilities into distinct domains, each with its own database and service environment. This is closely related to <a href="https://en.wikipedia.org/wiki/Domain-driven_design">Domain Driven Design (DDD)</a>, which benefits from microservices by aligning service boundaries with domain boundaries.</p>
+</li>
+</ul>
+<h2 id="toc_3">Conclusion</h2>
+<p>I hope this article gave you a some ideas you can apply to your specific circumstances. These are just the considerations I have thought about, and I'm sure there's more. Remember, it's not black and white, and it's worth considering both options. What will work for you depends entirely on your situation. The fun part of software is having the power and flexibility to build things just right.</p>
+<p>Here are some thoughts to end with:</p>
+<ul>
+<li>Not every situation requires Google level architecture. If you find yourself working on a monolith, consider the advantages to doing so.</li>
+<li>Has your microservice has grown beyond your comfort zone?  Think things though.  It might be fine as is, though you might want to modularize things nonetheless.</li>
+<li>If everyone is complaining about how long it takes to get code deployed, splitting up the code could help you.  Or it might just bankrupt your company.  As always, think it through.</li>
+</ul>
+<p>No easy answers, just lots to think about. Thanks for reading.</p>
+
+    </div>
+
+    </div>
+</div>
+						<p class="border-t my-10 dark:text-slate-200">
+						<span>&copy; 2023-2024<span>
+						</p>
+					</div>
+				</main>
+			</div>
+
+			<div x-cloak x-show="showModal" x-transition.opacity class="fixed inset-0 z-40 bg-black"></div>
+			<div
+					x-cloak x-show="showModal" 
+									x-transition:enter="transition ease-in-out duration-300 transform"
+									x-transition:enter-start="-translate-x-full"
+									x-transition:enter-end="translate-x-0"
+									x-transition:leave="transition ease-in-out duration-300 transform"
+									x-transition:leave-start="translate-x-0"
+									x-transition:leave-end="-translate-x-full"
+									class="fixed bg-slate left-0 top-0 bottom-0 z-50 w-10/12">
+
+				<div class="overflow-y-auto h-full">
+					<div class="">
+						<div class="bg-slate">
+							<div class="sticky top-12 print:hidden">
+	<div class="lg:hidden relative">
+		<div class="absolute right-0 inset-y-0">
+			<button type="button" x-on:click="showModal = false" 
+				class="inline-flex gap-2 bg-slate px-3 py-1 text-center text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-100 focus:ring focus:ring-slate-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="h-6 w-6">
+					<path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+				</svg>
+			</button>
+		</div>
+	</div>
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b">
+		<h1 class="font-semibold dark:text-slate-200  text-2xl">Links</h1>
+		
+		<a href="/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			Home
+		</a>
+		
+		<a href="/about/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			About
+		</a>
+		
+		<a href="https://github.com/rrx"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			GitHub
+		</a>
+		
+		<a href="https://www.linkedin.com/in/ryansadler/"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			LinkedIn
+		</a>
+		
+	</div>
+	
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b"
+		<h1 class="font-semibold dark:text-slate-200  text-2xl">Table of Contents</h1>
+		
+		<a href="#toc_1"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			When to consider a monolith
+		</a>
+		
+		<a href="#toc_2"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			When to consider microservices
+		</a>
+		
+		<a href="#toc_3"
+		   x-on:click="showModal = false"
+		   class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			Conclusion
+		</a>
+		
+	</div>
+	
+
+	
+	<div class="dark:text-white dark:bg-slate flex flex-col gap-2 p-2 border-b">
+		<h1 class="font-semibold dark:text-slate-200 text-2xl">Tags</h1>
+		
+		<a href="/tags/architecture" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			architecture
+		</a>
+		
+		<a href="/tags/staff-eng" class="px-3 py-1 hover:bg-blue-500 rounded-md">
+			staff-eng
+		</a>
+		
+	</div>
+	
+</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- //mobile-menu -->
+		<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/0.5.6/dist/mermaid.css">
+
+		<script>
+			mermaid.initialize({ startOnLoad: true, theme: "dark" });
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
+<script>
+var socket = io();
+socket.on('connect', function() {
+    console.log('Connected to server');
+});
+socket.on('reload', function() {
+    location.reload();
+});
+</script>
+
+	</body>
+
+</html>
