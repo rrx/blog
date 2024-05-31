@@ -20,6 +20,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: make install build
+      - run: pwd
+      - run: ls -la
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
