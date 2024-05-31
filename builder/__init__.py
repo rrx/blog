@@ -103,7 +103,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
         "build": kwargs,
         "links": [
             (3, "/", "Home"),
-            (3, "/about/", "About"),
+            (3, "/about", "About"),
             (3, "https://github.com/rrx", "GitHub"),
             (3, "https://www.linkedin.com/in/ryansadler/", "LinkedIn"),
         ],
