@@ -201,13 +201,3 @@ def _parse_tree(path, template_dir, layout, **kwargs):
         os.makedirs(os.path.dirname(build_filename), exist_ok=True)
         with open(build_filename, "w") as fp:
             fp.write(html)
-
-
-def main(*args):
-    parse_tree(*args, debug=False)
-
-
-if __name__ == "__main__":
-    import sys
-
-    main(sys.argv[1], "templates", "base")
