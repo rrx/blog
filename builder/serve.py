@@ -10,8 +10,6 @@ from flask_socketio import SocketIO
 import builder
 
 FILE_DIRECTORY = os.path.abspath("build")
-assert os.path.exists(FILE_DIRECTORY)
-assert os.path.exists(os.path.join(FILE_DIRECTORY, "404.html"))
 app = Flask(__name__)
 socketio = SocketIO(app)
 
@@ -72,6 +70,8 @@ def background_task2():
 
 
 def serve():
+    assert os.path.exists(FILE_DIRECTORY)
+    assert os.path.exists(os.path.join(FILE_DIRECTORY, "404.html"))
     threading.Thread(target=background_task1).start()
     threading.Thread(target=background_task2).start()
     socketio.run(app, debug=False)
