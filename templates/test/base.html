@@ -35,13 +35,13 @@
 				</h2>
 			</header>
 
-			<div class="bg-slate w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row print:w-full print:px-2">
+			<div class="bg-slate w-full flex flex-col gap-5 px-2 md:px-16 lg:px-28 md:flex-row print:w-full print:px-2">
 
 				<aside class="hidden md:w-1/3 lg:w-1/4 py-4 md:block print:hidden">
 					{% include "test/aside.html" %}
 				</aside>
 
-				<main class="md:w-2/3 lg:w-3/4 w-full py-1 min-h-screen print:w-full">
+				<main class="md:w-2/3 lg:w-3/4 w-full sm:py-1 min-h-screen print:w-full">
 					<div class="bg-slate">
 						<div class="">{% block body %}{% endblock %}</div>
 						<p class="border-t my-10 dark:text-slate-200">
@@ -60,7 +60,7 @@
 									x-transition:leave="transition ease-in-out duration-300 transform"
 									x-transition:leave-start="translate-x-0"
 									x-transition:leave-end="-translate-x-full"
-									class="fixed bg-slate left-0 top-0 bottom-0 z-50 w-10/12">
+									class="fixed bg-slate left-0 top-0 bottom-0 z-50 w-10/12 bg-slate-800">
 
 				<div class="overflow-y-auto h-full">
 					<div class="">
@@ -80,7 +80,9 @@
 			mermaid.initialize({ startOnLoad: true, theme: "dark" });
 		</script>
 
+		{% if debug %}
 		{% include "test/livereload.html" %}
+		{% endif %}
 
 	</body>
 

@@ -108,6 +108,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
             (3, "https://www.linkedin.com/in/ryansadler/", "LinkedIn"),
         ],
     }
+    main.update(kwargs)
 
     if kwargs.get("debug", False):
         main["links"].append((3, "/testing", "Testing"))
