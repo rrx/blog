@@ -21,7 +21,9 @@
 		<meta property="og:description" content="{{ description }}" />
 		{% if image %}
 		<meta property="og:image" content="/{{ image }}" />
+		<meta name="twitter:image:alt" content="{{ title }}">
 		{% endif %}
+		<meta name="twitter:card" content="summary_large_image">
 
 		<link href="/css/output.css" rel="stylesheet">
 		<link href="/css/dark.css" rel="stylesheet">
