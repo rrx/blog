@@ -165,12 +165,13 @@ def _parse_tree(path, template_dir, layout, **kwargs):
     out_posts = []
     for post in posts:
         kwargs = dict(
-                tags=sorted(tags.keys()),
-                toc=post["toc"],
-                post=post,
-                image=post.get("thumbnail"),
-                title=post["title"],
-                **main)
+            tags=sorted(tags.keys()),
+            toc=post["toc"],
+            post=post,
+            image=post.get("thumbnail"),
+            title=post["title"],
+            **main,
+        )
 
         html = template.render(**kwargs)
         if post["is_post"]:
