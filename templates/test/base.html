@@ -15,15 +15,20 @@
 		<meta name="description" content="{% block description %}{{ description }}{% endblock %}" />
 		<meta name="keywords" content="{{ ", ".join(tags) }}" />
 
+		<meta name="twitter:title" content="{{ title }}">
+		<meta name="twitter:description" content="{{ description }}">
+
 		<meta property="og:site_name" content="{{ site.title }}">
 		<meta property="og:title" content="{{ title }}" />
 		<meta property="og:type" content="article" />
 		<meta property="og:description" content="{{ description }}" />
 		{% if image %}
 		<meta property="og:image" content="/{{ image }}" />
+		<meta property="og:image:alt" content="{{ title }}">
+		<meta name="twitter:image" content="/{{ image }}">
 		<meta name="twitter:image:alt" content="{{ title }}">
-		{% endif %}
 		<meta name="twitter:card" content="summary_large_image">
+		{% endif %}
 
 		<link href="/css/output.css" rel="stylesheet">
 		<link href="/css/dark.css" rel="stylesheet">
