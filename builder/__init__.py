@@ -96,8 +96,10 @@ def _parse_tree(path, template_dir, layout, **kwargs):
     tags = defaultdict(list)
 
     formatter = pygments.formatters.html.HtmlFormatter()
+    base = "https://rrx.github.io"
     main = {
         "site": {
+            "base": base,
             "lang": "en",
             "highlight_styles": formatter.get_style_defs(),
             "title": "More Code, More Problems",
@@ -155,7 +157,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
                 }
 
                 if "thumbnail" in data:
-                    post["thumbnail"] = os.path.join("https://rrx.github.io", out_dir, data["thumbnail"])
+                    post["thumbnail"] = os.path.join(base, out_dir, data["thumbnail"])
 
                 posts.append(post)
 
