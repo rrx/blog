@@ -155,7 +155,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
                 }
 
                 if "thumbnail" in data:
-                    post["thumbnail"] = os.path.join(out_dir, data["thumbnail"])
+                    post["thumbnail"] = os.path.join("https://rrx.github.io", out_dir, data["thumbnail"])
 
                 posts.append(post)
 
@@ -170,6 +170,7 @@ def _parse_tree(path, template_dir, layout, **kwargs):
             post=post,
             image=post.get("thumbnail"),
             title=post["title"],
+            description=post["teaser"],
             **main,
         )
 
