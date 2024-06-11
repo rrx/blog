@@ -3,6 +3,7 @@ title: "Expectations of a Staff Software Developer"
 date: 2024-05-26T14:13:16-07:00
 draft: false
 thumbnail: image.jpg
+author: Ryan Sadler
 tags: 
 - staff-eng
 ---
@@ -72,9 +73,7 @@ If working autonomously and holding yourself accountable is a challenge, conside
 - Reviewing your week by asking yourself probing questions such as:
   - “What is my team’s priority?”
   - “What is my division’s priority?”
-  - “Did my
-
- week align with those priorities?”
+  - “Did my week align with those priorities?”
   - “Did my team align with those priorities?”
   - “Am I aware of any balls getting dropped?”
   - “What structures can I put in place, or actions can I take to handle this ongoingly?”

@@ -5,11 +5,12 @@
 {% block body %}
 <h3 class="border-t text-slate-100 font-semibold text-xl mt-2">{{ post.title }}</h3>
 
-<div class="flex space-x-4">
-	<p class="text-slate-100">Posted: {{ post.date }}</p>
+<div class="flex space-x-2 text-slate-100">
+	<i data-feather="calendar"></i>
+	<p class="">{{ post.date }}</p>
 	{% if post.tags %}
-	<p class="text-slate-100">
-	Tags: 
+	<i data-feather="tag"></i>
+	<p class="">
 	{% for tag in post.tags %}
 	<a href="/tags/{{ tag }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400">
 		{{tag}}
@@ -17,6 +18,11 @@
 	{% endfor %}
 	</p>
 	{% endif  %}
+	{% if post.author %}
+	<i data-feather="user"></i>
+	<p class="">{{ post.author }}</p>
+	{% endif  %}
+
 </div>
 
 <div class="content my-2">
@@ -26,5 +32,3 @@
 
 </div>
 {% endblock %}
-
-
