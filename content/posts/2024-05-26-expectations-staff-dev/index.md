@@ -70,6 +70,8 @@ If working autonomously and holding yourself accountable is a challenge, conside
 - Being honest with yourself about your productivity and having an objective measure for keeping you honest.
 - Using timers to provide focused blocks of time.
 - Having rituals to start and end your day. For example: At the end of your day, write down three things you want to accomplish the next day. Review that list the next day.
+- Having regular check-ins with a colleague or your manager to help with accountability.
+- Creating visibility for the work you are doing.  Nothing is more demoralizing than feeling like your work isn't seen, or doesn't matter.
 - Reviewing your week by asking yourself probing questions such as:
   - “What is my team’s priority?”
   - “What is my division’s priority?”
@@ -78,9 +80,29 @@ If working autonomously and holding yourself accountable is a challenge, conside
   - “Am I aware of any balls getting dropped?”
   - “What structures can I put in place, or actions can I take to handle this ongoingly?”
 
+Creating the accountability to be productive when no one is watching is a skill you can build.  Without it, you will struggle to find the motivation to keep going.
+
+### Creating Structures
+
+With all of the information, ideas and changes happening, it's easy to get lost in it all.  Trying to juggle all of that in your head results in missed opportunities and a lack of focus.  It's a constant challenge to keep up with priorities that seem to change constantly.  Here are some ideas of structures that have worked for me.
+
+One method I use for prioritization is a spreadsheet to track all my current, planned, and potential projects. This includes potential technical investments that require a business case before proceeding. I list these items and rank them using a simple formula. I use a modified RICE score to prioritize based on the following criteria:
+
+- **Reach**: How many people are impacted by this investment?
+- **Impact**: What is the potential impact? Is it trivial, or revolutionary? What is the ROI?
+- **Confidence**: How confident am I that the project will be successful or completed on time?
+- **Effort**: How many sprints will it take to achieve success?
+
+Based on these criteria, the list is sorted from the highest score to the lowest. I have found this approach helpful in preventing distraction by new ideas and ensuring focus on initiatives with the highest likelihood of success.
+
+Other ideas you can consider:
+- Schedule regular 1:1s with colleagues to check in on goals and priorities.  Discussing these openly can be a huge source of accountability, and can generate feedback and support.
+- Schedule regular retrospectives on projects and major issues that arise.  These are great ways to gather ideas on how to improve things.  Assign and follow up on action items generated during the retro.
+- Regularily groom and review your backlog and bug tracker.  I'm always surprised by the patterns I see there.  As circumstances change, these items need to be reprioritized.
+
 The huge productivity of staff developers is more likely attributable to carefully crafted structures than to natural talents or gifts. Shying away from putting these structures in place is understandable, as it usually entails facing difficult realities and situations. But this is exactly where the opportunity lies. Don’t miss out!
 
-### Lay a Foundation of Trust
+### Laying a Foundation of Trust
 
 With autonomy comes the need to build and maintain a high level of trust with management. Trust is the foundation that allows staff developers to operate independently and make impactful decisions without being second-guessed. Without this trust, the benefits of autonomy can quickly erode, leading to micromanagement and a reduction in the effectiveness of the role. 
 
