@@ -9,3 +9,9 @@ Using the following technologies:
 - [TailwindCSS](https://tailwindcss.com/)
 - [Feather Icons](https://feathericons.com/)
 - [AlpineJS](https://alpinejs.dev/)
+- [MermaidJS](https://mermaid.js.org/)
+
+Helpful links:
+- https://css-tricks.com/essential-meta-tags-social-media/
+- https://opengraph.dev/
+
