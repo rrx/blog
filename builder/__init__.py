@@ -157,7 +157,6 @@ def _parse_tree(path, template_dir, layout, **kwargs):
                 }
 
                 if "thumbnail" in data:
-                    print(base, out_dir, data["thumbnail"])
                     post["thumbnail"] = os.path.join("/", out_dir, data["thumbnail"])
 
                 if "author" in data:

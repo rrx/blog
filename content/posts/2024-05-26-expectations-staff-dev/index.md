@@ -1,7 +1,7 @@
 ---
 title: "Expectations of a Staff Software Developer"
 date: 2024-05-26T14:13:16-07:00
-draft: false
+draft: true
 thumbnail: image.jpg
 author: Ryan Sadler
 tags: 
