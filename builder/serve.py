@@ -44,7 +44,7 @@ def page_not_found(e):
 
 def background_task1():
     for changes in watchfiles.watch(FILE_DIRECTORY):
-        print(changes)
+        print('public', changes)
         try:
             socketio.emit("reload", {})
             print("Triggered reload")
@@ -57,11 +57,13 @@ def background_task1():
 
 
 def background_task2():
+    os.system("make build")
     for changes in watchfiles.watch("builder", "templates", "static", "content"):
         try:
-            print(changes)
-            reload(builder)
-            builder.parse_tree(debug=True)
+            print('source', changes)
+            # reload(builder)
+            # builder.parse_tree(debug=True)
+            os.system("make build-debug")
         except:
             import traceback
 

@@ -7,7 +7,7 @@ showToc: false
 ---
 
 
-My name is Ryan Sadler and I'm a Staff Software Engineer at Reddit.  You can find me on
+My name is Ryan Sadler and I'm a Staff Software Engineer at Gretel.  You can find me on
 [LinkedIn](https://www.linkedin.com/in/ryansadler/). This is a blog of my thoughts on software development.
 
 I've worked as a software developer for over 20 years now.  Coding has always been a hobby of mine.  My
