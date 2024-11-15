@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    font-family: "Montserrat", system-ui, sans-serif;
+    font-family: "Roboto Serif", system-ui, sans-serif;
   }
 
   .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
