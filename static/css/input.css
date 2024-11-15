@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-family: "Montserrat", system-ui, sans-serif;
+  }
+
   .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
     @apply font-semibold my-4 dark:text-slate-200;
   }
